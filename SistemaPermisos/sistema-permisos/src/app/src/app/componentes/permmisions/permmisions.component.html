@@ -1,0 +1,78 @@
+<form [formGroup]="frmCreate" class="container" style="margin-top: 10px;">
+
+    <div class="card">
+        <div class="card-header">
+         <h2 *ngIf="!isAdd">Crear Permisos</h2> 
+         <h2 *ngIf="isAdd">Editar Permisos</h2> 
+        </div>
+        <div class="card-body">
+    <div class="row container-fluid">
+        <div class="col-md-4">
+            <input type="text" class="form-control" placeholder="Id Permiso"  disabled formControlName="id" [(ngModel)]="EditPermmision.id">
+        </div>
+        <div class="col-md-12">
+           <h6> Nombre(s) Empleado</h6>
+            <div>
+                <input type="text" formControlName="EmployeeName" [(ngModel)]="EditPermmision.employeeName"   class="form-control" [ngClass]="{ 'is-invalid': submitted && f.EmployeeName.errors }">
+                <div *ngIf="submitted && f.EmployeeName.errors" class="invalid-feedback">
+                    <div *ngIf="f.EmployeeName.errors.required">*Este campo es obligatorio</div>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+           <h6>Apellido(s) Empleado</h6> 
+            <div>
+                <input type="text" formControlName="EmployeeLastName" [(ngModel)]="EditPermmision.employeeLastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.EmployeeLastName.errors }">
+                <div *ngIf="submitted && f.EmployeeLastName.errors" class="invalid-feedback">
+                    <div *ngIf="f.EmployeeLastName.errors.required">*Este campo es obligatorio</div>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+           <h6> Tipo de Permiso</h6>
+            <div>
+                <select formControlName="PermmisionTypeId" [(ngModel)]="EditPermmision.permmisionTypeId" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.PermmisionTypeId.errors }">
+                    <option value="">Seleccionar</option>
+                    <option *ngFor="let item of PermmisionTypeList" value="{{ item.id }}">
+                        {{item.description}}
+                    </option>
+
+                </select>
+                <div *ngIf="submitted && f.PermmisionTypeId.errors" class="invalid-feedback">
+                    <div *ngIf="f.PermmisionTypeId.errors.required">*Este campo es obligatorio</div>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+           <h6> Fecha Permiso</h6>
+            <div>
+                <input type="date" formControlName="PermmisionDate" [(ngModel)]="EditPermmision.permmisionDate" 
+                 class="form-control fa-calendar" [ngClass]="{ 'is-invalid': submitted && f.PermmisionDate.errors }">
+                <div *ngIf="submitted && f.PermmisionDate.errors" class="invalid-feedback">
+                    <div *ngIf="f.PermmisionDate.errors.required">*Este campo es obligatorio</div>
+            </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 15px; align-content: flex-end;" >
+            <button type="button"  (click)="SavePermmision()" style="margin-left: 20px;"
+             class="btn btn-success pull-right" *ngIf="!isAdd">
+             <i class="fa fa-save"></i>
+             Guardar
+            </button>
+            <button type="button" name="Editar"   (click)="EditarPermmision()" *ngIf="isAdd"
+             style="margin-left: 20px;" class="btn btn-success flex-end">
+             <i class="fa fa-save"></i>
+             Guardar
+            </button>
+            <button type="button" name="Volver" [routerLink]="['/']" routerLinkActive="router-link-active"  
+            style="margin-left: 5px;"  class="btn btn-info pull-right">
+            <i class="fa fa-arrow-circle-left"></i>
+            Volver
+            </button>
+          
+        </div>
+  
+</div>
+</div>
+</div>
+</form>
